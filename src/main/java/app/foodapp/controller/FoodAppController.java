@@ -1,4 +1,4 @@
-package app.appmeteo.controller;
+package app.foodapp.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
