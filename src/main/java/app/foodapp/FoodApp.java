@@ -1,4 +1,4 @@
-package app.appmeteo;
+package app.foodapp;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,12 +7,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class AppMeteo extends Application {
+public class FoodApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/app/appmeteo/view/appmeteo.fxml"));
-        primaryStage.setTitle("AppMeteo");
+        Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/foodapp.fxml"));
+        primaryStage.setTitle("FoodApp");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

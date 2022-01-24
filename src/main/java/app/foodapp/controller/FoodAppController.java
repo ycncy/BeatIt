@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AppMeteoController implements Initializable {
+public class FoodAppController implements Initializable {
 
     @FXML private Button helloWorldButton;
     @FXML private Button goodByeWorldButton;

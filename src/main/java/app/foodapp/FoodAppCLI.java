@@ -1,8 +1,8 @@
-package app.appmeteo;
+package app.foodapp;
 
 import java.util.Scanner;
 
-public class AppMeteoCLI {
+public class FoodAppCLI {
     public static void main(String[] args) {
         System.out.println("Welcome to the weather app");
 
