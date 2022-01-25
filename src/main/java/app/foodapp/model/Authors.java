@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Authors {
+
     private ArrayList<String> data;
 
     public Authors(List<String> input) {
