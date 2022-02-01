@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Recipe {
 
-    private String name;
-    private int id;
+    private final String name;
+    private final int id;
     private List<String> usedIngerdients = new ArrayList<>();
     private List<String> unUsedIngredients = new ArrayList<>();
 
@@ -24,6 +24,4 @@ public class Recipe {
     public List<String> getUnUsedIngredients() {
         return unUsedIngredients;
     }
-
-
 }
