@@ -6,11 +6,11 @@ import java.util.List;
 public class Recipe {
 
     private final String name;
-    private final String id;
+    private final long id;
     private List<String> usedIngerdients = new ArrayList<>();
     private List<String> unUsedIngredients = new ArrayList<>();
 
-    public Recipe(String name, String id, List<String> usedIngerdients, List<String> unUsedIngredients) {
+    public Recipe(String name, long id, List<String> usedIngerdients, List<String> unUsedIngredients) {
         this.id = id;
         this.name = name;
         this.usedIngerdients = usedIngerdients;
@@ -33,11 +33,16 @@ public class Recipe {
         return name;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
+    @Override
     public String toString() {
-        return name + " | " + id + " | " + getUnUsedIngredients() + " | " + getUsedIngerdients();
+        return "name='" + name + '\'' +
+                ", id=" + id +
+                ", usedIngerdients=" + usedIngerdients +
+                ", unUsedIngredients=" + unUsedIngredients +
+                '}';
     }
 }

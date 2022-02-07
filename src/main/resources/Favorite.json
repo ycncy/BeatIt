@@ -1,0 +1,154 @@
+[
+  {
+    "UnUsedIngredient": [
+      "apples"
+    ],
+    "id": 641803,
+    "UsedIngredient": [
+      "butter",
+      "cloves ground",
+      "lemon zest"
+    ],
+    "Name": "Easy & Delish! ~ Apple Crumble"
+  },
+  {
+    "UnUsedIngredient": [
+      "granny smith apples"
+    ],
+    "id": 640352,
+    "UsedIngredient": [
+      "cranberries",
+      "unsalted butter",
+      "oats"
+    ],
+    "Name": "Cranberry Apple Crisp"
+  },
+  {
+    "UnUsedIngredient": [
+      "granny smith apples"
+    ],
+    "id": 640352,
+    "UsedIngredient": [
+      "cranberries",
+      "unsalted butter",
+      "oats"
+    ],
+    "Name": "Cranberry Apple Crisp"
+  },
+  {
+    "UnUsedIngredient": [
+      "red apples"
+    ],
+    "id": 632660,
+    "UsedIngredient": [
+      "butter",
+      "cinnamon",
+      "apricot preserves"
+    ],
+    "Name": "Apricot Glazed Apple Tart"
+  },
+  {
+    "UnUsedIngredient": [
+      "apples"
+    ],
+    "id": 641803,
+    "UsedIngredient": [
+      "butter",
+      "cloves ground",
+      "lemon zest"
+    ],
+    "Name": "Easy & Delish! ~ Apple Crumble"
+  },
+  {
+    "UnUsedIngredient": [
+      "apples"
+    ],
+    "id": 73420,
+    "UsedIngredient": [
+      "baking powder",
+      "cinnamon",
+      "egg"
+    ],
+    "Name": "Apple Or Peach Strudel"
+  },
+  {
+    "UnUsedIngredient": [
+      "apple"
+    ],
+    "id": 775666,
+    "UsedIngredient": [
+      "baking powder",
+      "cinnamon",
+      "egg",
+      "milk"
+    ],
+    "Name": "Easy Homemade Apple Fritters"
+  },
+  {
+    "UnUsedIngredient": [
+      "apple"
+    ],
+    "id": 157103,
+    "UsedIngredient": [
+      "butter",
+      "cinnamon",
+      "egg",
+      "vanilla"
+    ],
+    "Name": "Apple Cinnamon Blondies"
+  },
+  {
+    "UnUsedIngredient": [
+      "apples"
+    ],
+    "id": 157111,
+    "UsedIngredient": [
+      "cinnamon",
+      "cognac",
+      "nutmeg",
+      "oats"
+    ],
+    "Name": "Vegan Baked Apples with Oat Crumble"
+  },
+  {
+    "UnUsedIngredient": [
+      "granny smith apples"
+    ],
+    "id": 674272,
+    "UsedIngredient": [
+      "baking powder",
+      "butter",
+      "milk",
+      "rice syrup"
+    ],
+    "Name": "Grand Apple and Cinnamon Biscuits"
+  },
+  {
+    "UnUsedIngredient": [
+      "granny smith apples"
+    ],
+    "id": 632572,
+    "UsedIngredient": [
+      "butter",
+      "cinnamon",
+      "lemon juice",
+      "nutmeg",
+      "pie crusts"
+    ],
+    "Name": "Apple Pie"
+  },
+  {
+    "UnUsedIngredient": [
+      "apples"
+    ],
+    "id": 632471,
+    "UsedIngredient": [
+      "ground cinnamon",
+      "baking soda",
+      "eggs",
+      "vanilla extract",
+      "walnuts"
+    ],
+    "Name": "Apple and Walnut Cake"
+  }
+]
