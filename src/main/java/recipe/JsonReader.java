@@ -4,56 +4,46 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import recipe.FavoriteRecipe;
-import recipe.Recipe;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class JsonReader {
 
     public static List<Recipe> recipes = new ArrayList<>();
 
-    public static List<Recipe> contains(String string) {
-        List<Recipe> recipeList = new ArrayList<>();
-        for(Recipe recipe : recipes) {
-            if(recipe.contains(string)) {
-                recipeList.add(recipe);
-            }
-        }
-        return recipeList;
-    }
+    public static void setRecipes(String request) {
+        JSONParser parser = new JSONParser();
 
-    public static void setRecipes() {
-        List<String> missedIngredients = new ArrayList<>();
-        List<String> usedIngredients = new ArrayList<>();
-        JSONParser jsonParser = new JSONParser();
         try {
-            JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("src/main/java/findByIngredients.json"));
-            for (int i=0 ;i < jsonArray.size();i++){
-                JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+            URL spooncular = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + request + "&apiKey=58dc69c6e25545be891d44c1147a74e1");
+            URLConnection url = spooncular.openConnection();
+            JSONArray jsonArray = (JSONArray) parser.parse(new BufferedReader(new InputStreamReader(url.getInputStream())));
+            for (Object value : jsonArray) {
+                List<String> missedIngredients = new ArrayList<>();
+                List<String> usedIngredients = new ArrayList<>();
+                JSONObject jsonObject = (JSONObject) value;
                 JSONArray missedIngredientsArray = (JSONArray) jsonObject.get("missedIngredients");
                 JSONArray usedIngredientsArray = (JSONArray) jsonObject.get("usedIngredients");
-                for (int j=0 ;j< missedIngredientsArray.size();j++){
-                    JSONObject missedObject = (JSONObject) missedIngredientsArray.get(j);
+                for (Object o : missedIngredientsArray) {
+                    JSONObject missedObject = (JSONObject) o;
                     missedIngredients.add((String) missedObject.get("name"));
                 }
-                for(int k = 0; k < usedIngredientsArray.size(); k++) {
-                    JSONObject usedObject = (JSONObject) usedIngredientsArray.get(k);
+                for (Object o : usedIngredientsArray) {
+                    JSONObject usedObject = (JSONObject) o;
                     usedIngredients.add((String) usedObject.get("name"));
                 }
                 recipes.add(new Recipe((String) jsonObject.get("title"), (long) jsonObject.get("id"), missedIngredients, usedIngredients));
             }
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
+
+        } catch (IOException | ParseException malformedURLException) {
+            malformedURLException.printStackTrace();
         }
     }
 
-    public static Recipe getRecipe(String name) {
+    public static Recipe getRecipeString(String name) {
         Recipe recipe = null;
         for(Recipe recipe1 : recipes) {
             if(recipe1.getName().equals(name)) {
@@ -63,7 +53,7 @@ public class JsonReader {
         return recipe;
     }
 
-    public static Recipe getRecipe(int id) {
+    public static Recipe getRecipeInt(int id) {
         Recipe recipe = null;
         for(Recipe recipe1 : recipes) {
             if(recipe1.getId() == id) {
@@ -73,11 +63,10 @@ public class JsonReader {
         return recipe;
     }
 
-    public static void main(String args[]) {
-        setRecipes();
-        System.out.println(getRecipe("Cranberry Apple Crisp"));
+    public static void main(String[] args) {
+        setRecipes("apple");
         for (Recipe recipe: recipes) {
-            FavoriteRecipe.addFavorite(getRecipe(recipe.getName()));
+            FavoriteRecipe.addFavorite(getRecipeString(recipe.getName()));
             System.out.println(recipe.getUsedIngerdients());
         }
     }
