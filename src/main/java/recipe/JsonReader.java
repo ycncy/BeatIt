@@ -14,11 +14,12 @@ public class JsonReader {
 
     public static List<Recipe> recipes = new ArrayList<>();
 
-    public static void setRecipes(String request) {
+    public static void setRecipes(String request, String number) {
+        recipes.clear();
         JSONParser parser = new JSONParser();
 
         try {
-            URL spooncular = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + request + "&apiKey=58dc69c6e25545be891d44c1147a74e1");
+            URL spooncular = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + request + "&number=" + number + "&apiKey=58dc69c6e25545be891d44c1147a74e1");
             URLConnection url = spooncular.openConnection();
             JSONArray jsonArray = (JSONArray) parser.parse(new BufferedReader(new InputStreamReader(url.getInputStream())));
             for (Object value : jsonArray) {
@@ -64,7 +65,7 @@ public class JsonReader {
     }
 
     public static void main(String[] args) {
-        setRecipes("apple");
+        setRecipes("apple", "2");
         for (Recipe recipe: recipes) {
             FavoriteRecipe.addFavorite(getRecipeString(recipe.getName()));
             System.out.println(recipe.getUsedIngerdients());

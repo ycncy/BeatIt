@@ -9,11 +9,11 @@ public class Recipe {
     private final List<String> usedIngerdients;
     private final List<String> missedIngredients;
 
-    public Recipe(String name, long id, List<String> usedIngerdients, List<String> unUsedIngredients) {
+    public Recipe(String name, long id, List<String> usedIngerdients, List<String> missedIngredients) {
         this.id = id;
         this.name = name;
         this.usedIngerdients = usedIngerdients;
-        this.missedIngredients = unUsedIngredients;
+        this.missedIngredients = missedIngredients;
     }
 
     public void addUsedIngerdients() {
@@ -38,10 +38,6 @@ public class Recipe {
 
     @Override
     public String toString() {
-        return "name='" + name + '\'' +
-                ", id=" + id +
-                ", usedIngerdients=" + usedIngerdients +
-                ", unUsedIngredients=" + missedIngredients +
-                '}';
+        return name + '\n';
     }
 }
