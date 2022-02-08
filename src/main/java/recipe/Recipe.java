@@ -17,8 +17,13 @@ public class Recipe {
         this.unUsedIngredients = unUsedIngredients;
     }
 
-    public void addUsedIngerdients() {
+    public boolean contains(String ingredient) {
+        if( usedIngerdients.contains(ingredient)) {
+            return true;
+        } return false;
+    }
 
+    public void addUsedIngerdients() {
     }
 
     public List<String> getUsedIngerdients() {
@@ -37,12 +42,7 @@ public class Recipe {
         return id;
     }
 
-    @Override
     public String toString() {
-        return "name='" + name + '\'' +
-                ", id=" + id +
-                ", usedIngerdients=" + usedIngerdients +
-                ", unUsedIngredients=" + unUsedIngredients +
-                '}';
+        return name + " | " + id +" | " +  getUnUsedIngredients() +" | " + getUsedIngerdients();
     }
 }
