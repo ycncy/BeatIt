@@ -14,7 +14,6 @@ public class FoodAppController implements Initializable {
     @FXML private Button goodByeWorldButton;
     @FXML private Label label;
 
-    //    @Override
     public void initialize(URL location, ResourceBundle resourceBundle) {}
 
     @FXML

@@ -17,7 +17,6 @@ public class Recipe {
     }
 
     public void addUsedIngerdients() {
-
     }
 
     public List<String> getUsedIngerdients() {

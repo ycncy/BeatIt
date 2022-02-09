@@ -25,17 +25,21 @@ public class JsonReader {
             for (Object value : jsonArray) {
                 List<String> missedIngredients = new ArrayList<>();
                 List<String> usedIngredients = new ArrayList<>();
+
                 JSONObject jsonObject = (JSONObject) value;
                 JSONArray missedIngredientsArray = (JSONArray) jsonObject.get("missedIngredients");
                 JSONArray usedIngredientsArray = (JSONArray) jsonObject.get("usedIngredients");
+
                 for (Object o : missedIngredientsArray) {
                     JSONObject missedObject = (JSONObject) o;
                     missedIngredients.add((String) missedObject.get("name"));
                 }
+
                 for (Object o : usedIngredientsArray) {
                     JSONObject usedObject = (JSONObject) o;
                     usedIngredients.add((String) usedObject.get("name"));
                 }
+
                 recipes.add(new Recipe((String) jsonObject.get("title"), (long) jsonObject.get("id"), missedIngredients, usedIngredients));
             }
 

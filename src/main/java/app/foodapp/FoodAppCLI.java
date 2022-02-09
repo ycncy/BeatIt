@@ -14,16 +14,16 @@ public class FoodAppCLI {
         Scanner input = new Scanner(System.in);
         int choice;
 
-        while(true){
+        while(true) {
 
-            System.out.println("---welcom on food app---\n");
-            System.out.print("1.) Find Recipe By Ingredient \n");
-            System.out.print("2.) Favorite Recipe\n");
-            System.out.print("3.) Exit\n");
+            System.out.println("---welcome on food app---\n");
+            System.out.print("1) Find Recipe By Ingredient \n");
+            System.out.print("2) Favorite Recipe\n");
+            System.out.print("3) Exit\n");
 
             choice = input.nextInt();
 
-            switch(choice){
+            switch(choice) {
 
                 case 1:
                     int chooseFavorite1;
@@ -41,7 +41,6 @@ public class FoodAppCLI {
                     System.out.println("Nombre de recette : ");
 
                     number = inputNumberfindByIngredient.next();
-
                     JsonReader.setRecipes(findByIngredient, number);
                     List<Recipe> recipes = JsonReader.recipes;
 
@@ -49,7 +48,6 @@ public class FoodAppCLI {
                         count1++;
                         chooseRecipes.add(recipe);
                         System.out.println(count1 + ")"  + recipe.getName());
-
                     }
 
                     System.out.println("Choisissez une recette par pitié !");
@@ -67,8 +65,12 @@ public class FoodAppCLI {
                         chooseRecipes.clear();
                         System.out.println(recipeChoose.getName() +"\n" + "Used Ingredients : " + recipeChoose.getUsedIngerdients() +"\n" + "Missed Ingredients : " + recipeChoose.getMissedIngredients());
                         System.out.println("Est-ce que vous voulez l'ajouter aux favoris ? (Y/N) ");
+
                         if(inputChooseFavorite1.next().equals("Y") || inputChooseFavorite1.next().equals("y") ) {
                             FavoriteRecipe.addFavorite(recipeChoose);
+                        }
+                        if(inputChooseFavorite1.next().equals("N") || inputChooseFavorite1.next().equals("n")) {
+                            FavoriteRecipe.removeFavorite(recipeChoose);
                         }
                         break;
                     }
@@ -79,21 +81,30 @@ public class FoodAppCLI {
                     int count = 0;
                     List<Recipe> favoriteBuff = new ArrayList<>(FavoriteRecipe.getRecipes());
 
-                    for(Recipe recipe:favoriteBuff) {
+                    for(Recipe recipe : favoriteBuff) {
                         count++;
                         System.out.println(count+".)"  + recipe.getName());
                     }
 
                     chooseFavorite = inputChooseFavorite.nextInt();
-                    if(chooseFavorite>favoriteBuff.size()) {
+                    if(chooseFavorite > favoriteBuff.size()) {
                         System.out.println("NOT A VALID NUMBER");
+                        favoriteBuff.clear();
                         break;
                     }
 
                     else {
+                        System.out.println("Choisis une recette chef");
                         Recipe recipeChoose = favoriteBuff.get(chooseFavorite - 1);
                         favoriteBuff.clear();
-                        System.out.println(recipeChoose.getName() +"\n" + "Used Ingredients : " + recipeChoose.getUsedIngerdients() +"\n" + "Missed Ingredients : " + recipeChoose.getMissedIngredients());
+                        System.out.println("Tu veux l'enlever le sang ? (Y/N)");
+                        if(inputChooseFavorite.next().equals("Y") || inputChooseFavorite.next().equals("y")) {
+                            FavoriteRecipe.removeFavorite(recipeChoose);
+                        }
+                        favoriteBuff.clear();
+                        //Recipe recipeChoose = favoriteBuff.get(chooseFavorite - 1);
+                        //favoriteBuff.clear();
+                        //System.out.println(recipeChoose.getName() +"\n" + "Used Ingredients : " + recipeChoose.getUsedIngerdients() +"\n" + "Missed Ingredients : " + recipeChoose.getMissedIngredients());
                         break;
                     }
 
