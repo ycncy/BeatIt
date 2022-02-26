@@ -6,21 +6,18 @@ public class Recipe {
 
     private final String name;
     private final long id;
-    private final List<String> usedIngerdients;
+    private final List<String> usedIngredients;
     private final List<String> missedIngredients;
 
-    public Recipe(String name, long id, List<String> usedIngerdients, List<String> missedIngredients) {
+    public Recipe(String name, long id, List<String> missedIngredients, List<String> usedIngredients) {
         this.id = id;
         this.name = name;
-        this.usedIngerdients = usedIngerdients;
+        this.usedIngredients = usedIngredients;
         this.missedIngredients = missedIngredients;
     }
 
-    public void addUsedIngerdients() {
-    }
-
     public List<String> getUsedIngerdients() {
-        return usedIngerdients;
+        return usedIngredients;
     }
 
     public List<String> getMissedIngredients() {
@@ -37,6 +34,6 @@ public class Recipe {
 
     @Override
     public String toString() {
-        return name + '\n';
+        return name;
     }
 }

@@ -3,7 +3,6 @@ package app.foodapp;
 import recipe.FavoriteRecipe;
 import recipe.JsonReader;
 import recipe.Recipe;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +12,7 @@ public class FoodAppCLI {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int choice;
+        JsonReader.reader();
 
         while(true) {
 
@@ -32,16 +32,25 @@ public class FoodAppCLI {
                     String number;
                     List<Recipe> chooseRecipes = new ArrayList<>();
 
-                    System.out.println("Ingredients (forme : ingredient,+ingredient,+ingredient... : ");
+                    System.out.println("Ingredients (Ecrivez 'stop' quand vous avez noté tous vos ingrédients) : ");
 
                     Scanner inputfindByIngredient = new Scanner(System.in);
                     Scanner inputNumberfindByIngredient = new Scanner(System.in);
-                    findByIngredient = inputfindByIngredient.next();
 
+                    while(true) {
+                        if(inputfindByIngredient.next().equals("stop")) {
+                            break;
+                        }
+                        if(JsonReader.allIngredients.contains(inputfindByIngredient.next())) {
+                            JsonReader.ingredients.add(inputfindByIngredient.next());
+                        }
+                        if(!inputfindByIngredient.next().equals("stop") && !JsonReader.allIngredients.contains(inputfindByIngredient.next())) {
+                            System.out.println("L'ingredient n'existe pas");
+                        }
+                    }
                     System.out.println("Nombre de recette : ");
-
                     number = inputNumberfindByIngredient.next();
-                    JsonReader.setRecipes(findByIngredient, number);
+                    JsonReader.setRecipes(number);
                     List<Recipe> recipes = JsonReader.recipes;
 
                     for(Recipe recipe : recipes) {
@@ -85,6 +94,7 @@ public class FoodAppCLI {
                         count++;
                         System.out.println(count+".)"  + recipe.getName());
                     }
+                    System.out.println("Choisis une recette chef");
 
                     chooseFavorite = inputChooseFavorite.nextInt();
                     if(chooseFavorite > favoriteBuff.size()) {
@@ -94,7 +104,6 @@ public class FoodAppCLI {
                     }
 
                     else {
-                        System.out.println("Choisis une recette chef");
                         Recipe recipeChoose = favoriteBuff.get(chooseFavorite - 1);
                         favoriteBuff.clear();
                         System.out.println("Tu veux l'enlever le sang ? (Y/N)");
@@ -102,9 +111,6 @@ public class FoodAppCLI {
                             FavoriteRecipe.removeFavorite(recipeChoose);
                         }
                         favoriteBuff.clear();
-                        //Recipe recipeChoose = favoriteBuff.get(chooseFavorite - 1);
-                        //favoriteBuff.clear();
-                        //System.out.println(recipeChoose.getName() +"\n" + "Used Ingredients : " + recipeChoose.getUsedIngerdients() +"\n" + "Missed Ingredients : " + recipeChoose.getMissedIngredients());
                         break;
                     }
 

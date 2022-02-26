@@ -4,10 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import java.io.*;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +13,7 @@ public class FavoriteRecipe {
     public static List<Recipe> favoriteRecipe = new ArrayList<>();
 
     public static List<Recipe> getRecipes() {
+        favoriteRecipe.clear();
         JSONParser parser = new JSONParser();
         try {
             JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-z\\src\\main\\resources\\Favorite.json"));

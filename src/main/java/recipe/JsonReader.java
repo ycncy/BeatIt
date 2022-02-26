@@ -12,14 +12,29 @@ import java.util.List;
 
 public class JsonReader {
 
+    public static List<String> allIngredients = new ArrayList<>();
+    public static List<String> ingredients = new ArrayList<>();
     public static List<Recipe> recipes = new ArrayList<>();
 
-    public static void setRecipes(String request, String number) {
+    public static String getIngredients() {
+        String ingredientsInput = null;
+        if(ingredients.size() == 1) {
+            ingredientsInput = ingredients.get(0);
+        } else {
+            for(int i = 0; i < ingredients.size() - 1; i++) {
+                ingredientsInput += ingredients.get(i) + ",+";
+            }
+            ingredientsInput += ingredients.get(ingredients.size() - 1);
+        }
+        return ingredientsInput;
+    }
+
+    public static void setRecipes(String number) {
         recipes.clear();
         JSONParser parser = new JSONParser();
 
         try {
-            URL spooncular = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + request + "&number=" + number + "&apiKey=58dc69c6e25545be891d44c1147a74e1");
+            URL spooncular = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + getIngredients() + "&number=" + number + "&apiKey=58dc69c6e25545be891d44c1147a74e1");
             URLConnection url = spooncular.openConnection();
             JSONArray jsonArray = (JSONArray) parser.parse(new BufferedReader(new InputStreamReader(url.getInputStream())));
             for (Object value : jsonArray) {
@@ -39,7 +54,6 @@ public class JsonReader {
                     JSONObject usedObject = (JSONObject) o;
                     usedIngredients.add((String) usedObject.get("name"));
                 }
-
                 recipes.add(new Recipe((String) jsonObject.get("title"), (long) jsonObject.get("id"), missedIngredients, usedIngredients));
             }
 
@@ -68,12 +82,21 @@ public class JsonReader {
         return recipe;
     }
 
-    public static void main(String[] args) {
-        setRecipes("apple", "2");
-        for (Recipe recipe: recipes) {
-            FavoriteRecipe.addFavorite(getRecipeString(recipe.getName()));
-            System.out.println(recipe.getUsedIngerdients());
+    public static void reader() {
+        String line = "";
+        String splitBy = ";";
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-z\\src\\main\\resources\\app\\foodapp\\view\\top-1k-ingredients.csv"));
+            while((line = br.readLine()) != null) {
+                String[] ingredients = line.split(splitBy);
+                allIngredients.add(ingredients[0]);
+            }
         }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(allIngredients);
     }
+
 }
 
