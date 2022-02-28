@@ -82,8 +82,7 @@ public class FoodAppController implements Initializable {
 
     @FXML
     private void displayRecipes() {
-
-        JsonReader.setRecipes(String.valueOf(30));
+        JsonReader.setRecipes(String.valueOf(spinner.getValue()));
         for(Recipe recipe : JsonReader.recipes) {
             //HBOX
             HBox hbox = new HBox();
