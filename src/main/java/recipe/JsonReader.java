@@ -105,11 +105,14 @@ public class JsonReader {
     public static String listToString(int id) {
         instructions(id);
         String instruction = null;
+        int i = 2;
         for(String step : instructions) {
             if(instruction == null) {
-                instruction = step;
+                instruction = "Step 1 : " + step + "\n";
+            } else {
+                instruction += "Step " + i + " : " + instructions.get(i - 1);
+                i++;
             }
-            instruction += ", " + step;
         }
         return instruction;
     }
