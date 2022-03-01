@@ -15,6 +15,7 @@ public class JsonReader {
     public static List<String> allIngredients = new ArrayList<>();
     public static List<String> ingredients = new ArrayList<>();
     public static List<Recipe> recipes = new ArrayList<>();
+    public static List<String> instructions = new ArrayList<>();
 
     public static String getIngredients() {
         String ingredientsInput = null;
@@ -32,7 +33,6 @@ public class JsonReader {
     public static void setRecipes(String number) {
         recipes.clear();
         JSONParser parser = new JSONParser();
-
         try {
             URL spooncular = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + getIngredients() + "&number=" + number + "&apiKey=58dc69c6e25545be891d44c1147a74e1");
             URLConnection url = spooncular.openConnection();
@@ -62,31 +62,36 @@ public class JsonReader {
         }
     }
 
-    public static Recipe getRecipeString(String name) {
-        Recipe recipe = null;
-        for(Recipe recipe1 : recipes) {
-            if(recipe1.getName().equals(name)) {
-                recipe = recipe1;
-            }
-        }
-        return recipe;
-    }
+    public static String instructions(int id) {
+        instructions.clear();
+        JSONParser parser = new JSONParser();
+        try {
+            URL spooncular = new URL("https://api.spoonacular.com/recipes/" + id +  "/analyzedInstructions");
+            URLConnection url = spooncular.openConnection();
+            JSONArray jsonArray = (JSONArray) parser.parse(new BufferedReader(new InputStreamReader(url.getInputStream())));
+            List<String> instructionslist = new ArrayList<>();
+            for (Object value : jsonArray) {
 
-    public static Recipe getRecipeInt(int id) {
-        Recipe recipe = null;
-        for(Recipe recipe1 : recipes) {
-            if(recipe1.getId() == id) {
-                recipe = recipe1;
+                JSONObject jsonObject = (JSONObject) value;
+                JSONArray instructions = (JSONArray) jsonObject.get("steps");
+
+                for(Object o : instructions) {
+                    JSONObject array = (JSONObject) o;
+                    instructionslist.add((String) array.get("step"));
+                }
             }
+            instructions.addAll(instructionslist);
+        } catch (IOException | ParseException malformedURLException) {
+            malformedURLException.printStackTrace();
         }
-        return recipe;
+        return instructions.toString();
     }
 
     public static void reader() {
         String line = "";
         String splitBy = ";";
         try {
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-z\\src\\main\\resources\\app\\foodapp\\view\\top-1k-ingredients.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\app\\foodapp\\view\\top-1k-ingredients.csv"));
             while((line = br.readLine()) != null) {
                 String[] ingredients = line.split(splitBy);
                 allIngredients.add(ingredients[0]);
@@ -95,8 +100,18 @@ public class JsonReader {
         catch(IOException e) {
             e.printStackTrace();
         }
-        System.out.println(allIngredients);
     }
 
+    public static String listToString(int id) {
+        instructions(id);
+        String instruction = null;
+        for(String step : instructions) {
+            if(instruction == null) {
+                instruction = step;
+            }
+            instruction += ", " + step;
+        }
+        return instruction;
+    }
 }
 

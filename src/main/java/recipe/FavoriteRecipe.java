@@ -16,7 +16,7 @@ public class FavoriteRecipe {
         favoriteRecipe.clear();
         JSONParser parser = new JSONParser();
         try {
-            JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-z\\src\\main\\resources\\Favorite.json"));
+            JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json"));
             for(int i = 0; i < jsonArray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonArray.get(i);
                 JSONArray missedIngredientsArray = (JSONArray) jsonObject.get("MissedIngredients");
@@ -31,7 +31,7 @@ public class FavoriteRecipe {
                 }
                 favoriteRecipe.add(new Recipe(jsonObject.get("Name").toString(),(long) jsonObject.get("id"), usedIngredients, missedIngredients));
             }
-            } catch (IOException | ParseException malformedURLException) {
+        } catch (IOException | ParseException malformedURLException) {
             malformedURLException.printStackTrace();
         }
         return favoriteRecipe;
@@ -52,10 +52,10 @@ public class FavoriteRecipe {
         JSONParser jsonParser = new JSONParser();
 
         try {
-            JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-z\\src\\main\\resources\\Favorite.json"));
+            JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json"));
             jsonArray.add(obj);
             favoriteRecipe.add(recipe);
-            FileWriter file = new FileWriter("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-z\\src\\main\\resources\\Favorite.json");
+            FileWriter file = new FileWriter("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json");
             file.append(jsonArray.toJSONString());
             file.close();
 
@@ -70,14 +70,14 @@ public class FavoriteRecipe {
         JSONParser jsonParser = new JSONParser();
         try {
             JSONArray finalArray = new JSONArray();
-            JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-z\\src\\main\\resources\\Favorite.json"));
+            JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json"));
             for(int i = 0; i < jsonArray.size(); i++) {
                 if(!((JSONObject) jsonArray.get(i)).get("Name").equals(recipe.getName())) {
                     finalArray.add(jsonArray.get(i));
                 }
             }
             favoriteRecipe.remove(recipe);
-            FileWriter file = new FileWriter("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-z\\src\\main\\resources\\Favorite.json");
+            FileWriter file = new FileWriter("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json");
             file.append(finalArray.toJSONString());
             file.close();
         } catch (IOException | ParseException e) {

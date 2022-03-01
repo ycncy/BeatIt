@@ -1,45 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Label?>
 
-<BorderPane prefHeight="461.0" prefWidth="790.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.FoodAppController" stylesheets="@stylesheet.css" fx:id="borderPane">
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.ScrollPane?>
+<BorderPane fx:id="borderPane" prefHeight="461.0" prefWidth="790.0" style="-fx-background-color: grey;" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.FoodAppController">
     <top>
         <Pane prefHeight="107.0" prefWidth="790.0" style="-fx-background-color: grey;">
             <children>
-                <Button alignment="CENTER" layoutX="524.0" layoutY="19.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="69.0" text="AJOUTER" fx:id="addIngredientButton" onMouseClicked="#addIngredient"/>
-                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="666.0" layoutY="19.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="110.0" text="Rechercher" textAlignment="CENTER" fx:id="researchButton" onMouseClicked="#displayRecipes"/>
-                <Spinner layoutX="599.0" layoutY="19.0" prefHeight="33.0" prefWidth="59.0" />
-                <Text fill="RED" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FOOD APP" textAlignment="CENTER" wrappingWidth="198.8359375">
+                <Button fx:id="addIngredientButton" alignment="CENTER" layoutX="524.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#addIngredient" prefHeight="33.0" prefWidth="69.0" text="AJOUTER" />
+                <Button fx:id="researchButton" alignment="CENTER" contentDisplay="CENTER" layoutX="666.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#displayRecipes" prefHeight="33.0" prefWidth="110.0" text="RECHERCHER" textAlignment="CENTER" />
+                <Spinner fx:id="spinner" amountToStepBy="1" initialValue="0" layoutX="599.0" layoutY="19.0" max="100" min="1" prefHeight="33.0" prefWidth="59.0" />
+                <Text fill="WHITE" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FOOD APP" textAlignment="CENTER" wrappingWidth="198.8359375">
                     <font>
                         <Font size="36.0" />
                     </font>
                 </Text>
-                <Label contentDisplay="TOP" layoutX="210.0" layoutY="57.0" prefHeight="44.0" prefWidth="570.0" fx:id="ingredientsText"/>
-                <TextField layoutX="206.0" layoutY="19.0" prefHeight="35.0" prefWidth="311.0" fx:id="ingredientTextField"/>
+                <Label fx:id="ingredientsText" contentDisplay="TOP" layoutX="210.0" layoutY="57.0" prefHeight="44.0" prefWidth="570.0" />
+                <TextField fx:id="ingredientTextField" layoutX="206.0" layoutY="19.0" prefHeight="33.0" prefWidth="311.0" />
+                <Button fx:id="clearAll" layoutX="666.0" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#clearAll" prefHeight="33.0" prefWidth="110.0" text="TOUT EFFACER" />
             </children>
         </Pane>
     </top>
-    <right>
-        <ScrollBar orientation="VERTICAL" BorderPane.alignment="CENTER" />
-    </right>
-    <bottom>
-        <Label text="TITOUAN YACINE NICOLAS MATTEO" BorderPane.alignment="CENTER" />
-    </bottom>
     <left>
-        <VBox prefHeight="380.0" prefWidth="207.0" style="-fx-background-color: darkgrey;" BorderPane.alignment="CENTER" fx:id="vboxFavorite">
+        <VBox fx:id="vboxFavorite" prefHeight="380.0" prefWidth="207.0" style="-fx-background-color: darkgrey;" BorderPane.alignment="CENTER">
             <children>
                 <Region prefHeight="3.0" prefWidth="208.0" style="-fx-background-color: lightblue;" />
                 <HBox layoutX="10.0" layoutY="10.0" prefHeight="29.0" prefWidth="208.0" style="-fx-background-color: lightblue;">
@@ -50,9 +44,6 @@
                             </font>
                         </Text>
                     </children>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
                     <VBox.margin>
                         <Insets bottom="5.0" />
                     </VBox.margin>
@@ -61,7 +52,9 @@
         </VBox>
     </left>
     <center>
-        <VBox prefHeight="0.0" prefWidth="568.0" style="-fx-background-color: lightgrey;" BorderPane.alignment="CENTER" fx:id="vboxRecipesCenter">
-        </VBox>
+        <ScrollPane BorderPane.alignment="CENTER" hbarPolicy="NEVER">
+            <VBox fx:id="vboxRecipesCenter" prefHeight="0.0" prefWidth="568.0" style="-fx-background-color: lightgrey;" BorderPane.alignment="CENTER">
+            </VBox>
+        </ScrollPane>
     </center>
 </BorderPane>

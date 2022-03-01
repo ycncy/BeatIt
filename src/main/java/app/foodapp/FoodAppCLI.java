@@ -13,9 +13,9 @@ public class FoodAppCLI {
         Scanner input = new Scanner(System.in);
         int choice;
         JsonReader.reader();
+        FavoriteRecipe.favoriteRecipe.clear();
 
         while(true) {
-
             System.out.println("---welcome on food app---\n");
             System.out.print("1) Find Recipe By Ingredient \n");
             System.out.print("2) Favorite Recipe\n");
@@ -28,7 +28,6 @@ public class FoodAppCLI {
                 case 1:
                     int chooseFavorite1;
                     int count1 = 0;
-                    String findByIngredient;
                     String number;
                     List<Recipe> chooseRecipes = new ArrayList<>();
 
@@ -36,17 +35,11 @@ public class FoodAppCLI {
 
                     Scanner inputfindByIngredient = new Scanner(System.in);
                     Scanner inputNumberfindByIngredient = new Scanner(System.in);
-
-                    while(true) {
-                        if(inputfindByIngredient.next().equals("stop")) {
-                            break;
-                        }
-                        if(JsonReader.allIngredients.contains(inputfindByIngredient.next())) {
-                            JsonReader.ingredients.add(inputfindByIngredient.next());
-                        }
-                        if(!inputfindByIngredient.next().equals("stop") && !JsonReader.allIngredients.contains(inputfindByIngredient.next())) {
-                            System.out.println("L'ingredient n'existe pas");
-                        }
+                    if(JsonReader.allIngredients.contains(inputfindByIngredient.next())) {
+                        JsonReader.ingredients.add(inputfindByIngredient.next());
+                    }
+                    if(!JsonReader.allIngredients.contains(inputfindByIngredient.next())) {
+                        System.out.println("L'ingredient n'existe pas");
                     }
                     System.out.println("Nombre de recette : ");
                     number = inputNumberfindByIngredient.next();
@@ -72,7 +65,8 @@ public class FoodAppCLI {
                     else {
                         Recipe recipeChoose = chooseRecipes.get(chooseFavorite1 - 1);
                         chooseRecipes.clear();
-                        System.out.println(recipeChoose.getName() +"\n" + "Used Ingredients : " + recipeChoose.getUsedIngerdients() +"\n" + "Missed Ingredients : " + recipeChoose.getMissedIngredients());
+                        System.out.println(recipeChoose.getName() +"\n" + "Used Ingredients : " + recipeChoose.getUsedIngerdients() +"\n" + "Missed Ingredients : " + recipeChoose.getMissedIngredients()
+                                + "\nInstructions : " + JsonReader.listToString((int) recipeChoose.getId()));
                         System.out.println("Est-ce que vous voulez l'ajouter aux favoris ? (Y/N) ");
 
                         if(inputChooseFavorite1.next().equals("Y") || inputChooseFavorite1.next().equals("y") ) {

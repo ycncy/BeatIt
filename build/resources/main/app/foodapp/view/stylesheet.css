@@ -1,17 +1,44 @@
-#addToFavorite, #deleteFromFavorite {
+#addToFavorite, #favoriteButton{
+    -fx-shape: "M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z";
+    -fx-background-color: white;
+    -fx-text-fill: "black";
+}
+
+#addToFavorite:hover, #favoriteButton:hover {
+    -fx-background-color: red;
+}
+
+#deleteFromFavorite {
     -fx-shape: "M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z";
     -fx-background-color: red;
     -fx-text-fill: "black";
 }
 
+#deleteFromFavorite:hover {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+}
+
 #borderPane {
-    -fx-font: helvetica;
+    -fx-font-family: "Lato";
 }
 
 .hyperlink:hover {
     -fx-underline: false;
+    -fx-border-color: transparent;
 }
 
 .hyperlink {
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+}
+
+.button {
+    -fx-border-color: blue;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: blue;
+    -fx-font-family: Helvetica, sans-serif;
+    -fx-font-size: 1em;
     -fx-text-fill: white;
 }
