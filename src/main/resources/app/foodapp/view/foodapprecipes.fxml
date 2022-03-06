@@ -1,45 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="792.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.FoodAppController2">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="792.0" style="-fx-font-weight: bold" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.FoodAppController2">
    <bottom>
-      <VBox prefHeight="180.5" prefWidth="792.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+      <VBox prefWidth="792.0" spacing="15.0" style="-fx-background-color: #E2D3c4;" BorderPane.alignment="CENTER">
          <children>
-            <Pane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Text layoutX="385.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                  <Text layoutX="45.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-               </children>
-            </Pane>
+            <Label fx:id="instructions" alignment="CENTER" prefHeight="30.0" prefWidth="790.0" text="INSTRUCTIONS" textAlignment="CENTER" wrapText="true" />
+            <Label fx:id="instructionsArea" alignment="TOP_CENTER" prefHeight="150.0" prefWidth="790.0" textAlignment="CENTER" wrapText="true" />
          </children>
       </VBox>
    </bottom>
    <top>
-      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="792.0" spacing="287.0" style="-fx-background-color: lightgrey;" BorderPane.alignment="BOTTOM_RIGHT">
+      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="792.0" style="-fx-background-color: #37312F;" BorderPane.alignment="BOTTOM_RIGHT">
          <children>
-            <Pane prefHeight="100.0" prefWidth="100.0">
-               <children>
-                  <Button id="backButton" layoutX="24.0" layoutY="38.0" mnemonicParsing="false" text="RETOUR" onMouseClicked="#displayPage1"/>
-               </children>
-            </Pane>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" fx:id="recipeName">
+            <Button fx:id="backButton" mnemonicParsing="false" onMouseClicked="#displayPage1" text="RETOUR" textAlignment="CENTER">
                <HBox.margin>
-                  <Insets top="40.0" />
+                  <Insets top="35.0" />
                </HBox.margin>
-            </Text>
-            <Pane prefHeight="100.0" prefWidth="100.0">
-               <children>
-                  <Button id="favoritButton" alignment="CENTER" contentDisplay="RIGHT" layoutX="24.0" layoutY="38.0" mnemonicParsing="false" text="Button" />
-               </children>
-            </Pane>
+            </Button>
+            <Label fx:id="recipeName" alignment="CENTER" contentDisplay="CENTER" prefHeight="100.0" prefWidth="659.0" text="Nom Recette" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="favoriteButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#disfavorite" prefHeight="31.0" prefWidth="31.0" style="-fx-shape: M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z">
+               <HBox.margin>
+                  <Insets top="35.0" />
+               </HBox.margin>
+            </Button>
          </children>
          <BorderPane.margin>
             <Insets />
@@ -47,14 +34,14 @@
       </HBox>
    </top>
    <center>
-      <VBox prefHeight="180.0" prefWidth="790.0" style="-fx-background-color: lightblue;" BorderPane.alignment="CENTER">
+      <VBox prefWidth="790.0" spacing="15.0" style="-fx-background-color: #E2D3c4; -fx-border-color: transparent transparent black transparent;" BorderPane.alignment="CENTER">
          <children>
-            <Pane prefHeight="200.0" prefWidth="792.0">
-               <children>
-                  <Text layoutX="385.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                  <Text layoutX="45.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="303.13671875" />
-               </children>
-            </Pane>
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="790.0" text="INGREDIENTS" textAlignment="CENTER" wrapText="true" />
+            <Label fx:id="ingredientsArea" alignment="TOP_CENTER" lineSpacing="1.0" prefHeight="150.0" prefWidth="790.0" wrapText="true">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
          </children>
       </VBox>
    </center>

@@ -67,13 +67,13 @@ public class FoodAppCLI {
                         chooseRecipes.clear();
                         System.out.println(recipeChoose.getName() +"\n" + "Used Ingredients : " + recipeChoose.getUsedIngerdients() +"\n" + "Missed Ingredients : " + recipeChoose.getMissedIngredients()
                                 + "\nInstructions : " + JsonReader.listToString((int) recipeChoose.getId()));
-                        System.out.println("Est-ce que vous voulez l'ajouter aux favoris ? (Y/N) ");
+                        System.out.println("Est-ce que vous voulez l'ajouter aux favoris ? (1/2) ");
 
-                        if(inputChooseFavorite1.next().equals("Y") || inputChooseFavorite1.next().equals("y") ) {
+                        if(inputChooseFavorite1.nextInt() == (1)) {
                             FavoriteRecipe.addFavorite(recipeChoose);
                         }
-                        if(inputChooseFavorite1.next().equals("N") || inputChooseFavorite1.next().equals("n")) {
-                            FavoriteRecipe.removeFavorite(recipeChoose);
+                        if(inputChooseFavorite1.nextInt() == 2) {
+                            break;
                         }
                         break;
                     }
@@ -100,8 +100,8 @@ public class FoodAppCLI {
                     else {
                         Recipe recipeChoose = favoriteBuff.get(chooseFavorite - 1);
                         favoriteBuff.clear();
-                        System.out.println("Tu veux l'enlever le sang ? (Y/N)");
-                        if(inputChooseFavorite.next().equals("Y") || inputChooseFavorite.next().equals("y")) {
+                        System.out.println("Tu veux l'enlever le sang ? (Yes/No)");
+                        if(inputChooseFavorite.next().equals("Yes") || inputChooseFavorite.next().equals("yes")) {
                             FavoriteRecipe.removeFavorite(recipeChoose);
                         }
                         favoriteBuff.clear();

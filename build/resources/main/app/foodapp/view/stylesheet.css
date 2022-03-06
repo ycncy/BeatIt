@@ -5,12 +5,12 @@
 }
 
 #addToFavorite:hover, #favoriteButton:hover {
-    -fx-background-color: red;
+    -fx-background-color: #A4413A;
 }
 
 #deleteFromFavorite {
     -fx-shape: "M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z";
-    -fx-background-color: red;
+    -fx-background-color: #A4413A;
     -fx-text-fill: "black";
 }
 
@@ -21,6 +21,32 @@
 
 #borderPane {
     -fx-font-family: "Lato";
+}
+
+.scroll-pane {
+    -fx-background-color: black;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: white;
+    -fx-background-radius: 0em;
 }
 
 .hyperlink:hover {
@@ -34,11 +60,44 @@
 }
 
 .button {
-    -fx-border-color: blue;
+    -fx-border-color: #C48538;
     -fx-border-width: 0;
     -fx-background-radius: 0;
-    -fx-background-color: blue;
+    -fx-background-color: #C48538;
     -fx-font-family: Helvetica, sans-serif;
     -fx-font-size: 1em;
     -fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-border-color: #C48538;
+    -fx-background-color:#C48538;
+}
+
+#spinner .increment-arrow-button,
+#spinner .decrement-arrow-button {
+    -fx-background-color: #C48538;
+    -fx-background-radius: 0;
+}
+
+#spinner .increment-arrow-button .increment-arrow,
+#spinner .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: white;
+}
+#spinner .increment-arrow-button:hover,
+#spinner .decrement-arrow-button:hover {
+    -fx-background-color: #C48538;
+}
+#spinner .increment-arrow-button:hover:pressed,
+#spinner .decrement-arrow-button:hover:pressed,
+#spinner .increment-arrow-button:pressed,
+#spinner .decrement-arrow-button:pressed {
+    -fx-background-color: white;
+    -fx-border-color: white;
+}
+
+.text-field {
+    -fx-border-color: white;
+    -fx-background-color: white;
+    -fx-background-radius: 0em;
 }

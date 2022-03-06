@@ -18,10 +18,7 @@ import recipe.JsonReader;
 import recipe.Recipe;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class FoodAppController implements Initializable {
 
@@ -31,7 +28,7 @@ public class FoodAppController implements Initializable {
     @FXML private VBox vboxRecipesCenter;
     @FXML private VBox vboxFavorite;
     public static String recipeName;
-    private List<String> recipeNames = new ArrayList<>();
+    private final List<String> recipeNames = new ArrayList<>();
 
     public void initialize(URL location, ResourceBundle resourceBundle) {
         for(Recipe recipe : FavoriteRecipe.getRecipes()) {
@@ -48,10 +45,11 @@ public class FoodAppController implements Initializable {
             hyperlink.setPrefHeight(32.0);
             hyperlink.setPrefWidth(156.0);
             hyperlink.setId(recipe.getName());
+            hyperlink.setWrapText(true);
             hyperlink.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    recipeName = hyperlink.getText().toUpperCase(Locale.ROOT);
+                    recipeName = hyperlink.getText();
                     hyperlink.setVisited(false);
                     hyperlink.setUnderline(false);
                     displayPage2(event);
@@ -65,6 +63,7 @@ public class FoodAppController implements Initializable {
             button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
+                    recipeNames.remove(recipe.getName());
                     FavoriteRecipe.removeFavorite(recipe);
                     vboxFavorite.getChildren().remove(hbox);
                 }
@@ -82,12 +81,13 @@ public class FoodAppController implements Initializable {
     @FXML
     private void addIngredient() {
         if(ingredientTextField.getText() != null) {
+            ingredientsText.setWrapText(true);
             if(JsonReader.allIngredients.contains(ingredientTextField.getText())) {
                 JsonReader.ingredients.add(ingredientTextField.getText());
                 if (ingredientsText.getText().equals("")) {
-                    ingredientsText.setText(ingredientTextField.getText());
+                    ingredientsText.setText(ingredientTextField.getText().toUpperCase(Locale.ROOT));
                 } else {
-                    ingredientsText.setText(ingredientsText.getText() + ", " + ingredientTextField.getText());
+                    ingredientsText.setText(ingredientsText.getText() + ", " + ingredientTextField.getText().toUpperCase(Locale.ROOT));
                 }
                 ingredientTextField.clear();
             } else {
@@ -103,7 +103,6 @@ public class FoodAppController implements Initializable {
     @FXML
     private void clearAll() {
         ingredientsText.setText("");
-        vboxRecipesCenter.getChildren().removeAll(vboxRecipesCenter.getChildren());
         spinner.getValueFactory().setValue(0);
     }
 
@@ -117,6 +116,7 @@ public class FoodAppController implements Initializable {
             hbox.setPrefHeight(0.0);
             hbox.setPrefWidth(568.0);
             hbox.setPadding(new Insets(10,10,10,10));
+            hbox.setStyle("-fx-background-color: blue");
 
             //HyperLink et Button
 
@@ -127,10 +127,11 @@ public class FoodAppController implements Initializable {
             hyperlink.setContentDisplay(ContentDisplay.RIGHT);
             hyperlink.setPrefWidth(517);
             hyperlink.setId("recipeName");
+            hyperlink.setWrapText(true);
             hyperlink.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    recipeName = hyperlink.getText().toUpperCase(Locale.ROOT);
+                    recipeName = hyperlink.getText();
                     hyperlink.setVisited(false);
                     hyperlink.setUnderline(false);
                     displayPage2(event);
@@ -173,10 +174,11 @@ public class FoodAppController implements Initializable {
                         hyperlink.setPrefHeight(32.0);
                         hyperlink.setPrefWidth(156);
                         hyperlink.setId("recipeName");
+                        hyperlink.setWrapText(true);
                         hyperlink.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
-                                recipeName = hyperlink.getText().toUpperCase(Locale.ROOT);
+                                recipeName = hyperlink.getText();
                                 hyperlink.setVisited(false);
                                 hyperlink.setUnderline(false);
                                 displayPage2(event);
@@ -190,6 +192,8 @@ public class FoodAppController implements Initializable {
                         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
+                                favoriteButton.setStyle("-fx-background-color: white");
+                                recipeNames.remove(recipe.getName());
                                 FavoriteRecipe.removeFavorite(recipe);
                                 vboxFavorite.getChildren().remove(hbox);
                             }
@@ -214,12 +218,12 @@ public class FoodAppController implements Initializable {
     private void displayPage2(MouseEvent event) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("app/foodapp/view/foodapprecipes.fxml"));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("app/foodapp/view/foodapprecipes.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
+        stage.setScene(new Scene(Objects.requireNonNull(root)));
         stage.show();
     }
 }

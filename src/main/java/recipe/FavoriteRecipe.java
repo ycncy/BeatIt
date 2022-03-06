@@ -11,6 +11,7 @@ import java.util.List;
 public class FavoriteRecipe {
 
     public static List<Recipe> favoriteRecipe = new ArrayList<>();
+    public static List<Recipe> fav = new ArrayList<>();
 
     public static List<Recipe> getRecipes() {
         favoriteRecipe.clear();
@@ -30,6 +31,7 @@ public class FavoriteRecipe {
                     usedIngredients.add((String) o);
                 }
                 favoriteRecipe.add(new Recipe(jsonObject.get("Name").toString(),(long) jsonObject.get("id"), usedIngredients, missedIngredients));
+                fav.add(new Recipe(jsonObject.get("Name").toString(),(long) jsonObject.get("id"), usedIngredients, missedIngredients));
             }
         } catch (IOException | ParseException malformedURLException) {
             malformedURLException.printStackTrace();
@@ -55,6 +57,7 @@ public class FavoriteRecipe {
             JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json"));
             jsonArray.add(obj);
             favoriteRecipe.add(recipe);
+            fav.add(recipe);
             FileWriter file = new FileWriter("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json");
             file.append(jsonArray.toJSONString());
             file.close();

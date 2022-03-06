@@ -34,7 +34,7 @@ public class JsonReader {
         recipes.clear();
         JSONParser parser = new JSONParser();
         try {
-            URL spooncular = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + getIngredients() + "&number=" + number + "&apiKey=58dc69c6e25545be891d44c1147a74e1");
+            URL spooncular = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + getIngredients() + "&number=" + number + "&apiKey=c635a316d5e24e939503ff1e7342e9f5");
             URLConnection url = spooncular.openConnection();
             JSONArray jsonArray = (JSONArray) parser.parse(new BufferedReader(new InputStreamReader(url.getInputStream())));
             for (Object value : jsonArray) {
@@ -66,7 +66,7 @@ public class JsonReader {
         instructions.clear();
         JSONParser parser = new JSONParser();
         try {
-            URL spooncular = new URL("https://api.spoonacular.com/recipes/" + id +  "/analyzedInstructions");
+            URL spooncular = new URL("https://api.spoonacular.com/recipes/" + id +  "/analyzedInstructions?apiKey=c635a316d5e24e939503ff1e7342e9f5");
             URLConnection url = spooncular.openConnection();
             JSONArray jsonArray = (JSONArray) parser.parse(new BufferedReader(new InputStreamReader(url.getInputStream())));
             List<String> instructionslist = new ArrayList<>();
@@ -110,7 +110,7 @@ public class JsonReader {
             if(instruction == null) {
                 instruction = "Step 1 : " + step + "\n";
             } else {
-                instruction += "Step " + i + " : " + instructions.get(i - 1);
+                instruction += "Step " + i + " : " + instructions.get(i - 1) + "\n";
                 i++;
             }
         }
