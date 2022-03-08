@@ -31,7 +31,7 @@ public class FoodAppController implements Initializable {
     private final List<String> recipeNames = new ArrayList<>();
 
     public void initialize(URL location, ResourceBundle resourceBundle) {
-        for(Recipe recipe : FavoriteRecipe.getRecipes()) {
+        for(Recipe recipe : FavoriteRecipe.getRecipes("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json")) {
             HBox hbox = new HBox();
             hbox.setLayoutX(10.0);
             hbox.setPrefHeight(25.0);
@@ -46,6 +46,7 @@ public class FoodAppController implements Initializable {
             hyperlink.setPrefWidth(156.0);
             hyperlink.setId(recipe.getName());
             hyperlink.setWrapText(true);
+            hyperlink.setStyle("-fx-text-fill: white");
             hyperlink.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -64,7 +65,7 @@ public class FoodAppController implements Initializable {
                 @Override
                 public void handle(MouseEvent event) {
                     recipeNames.remove(recipe.getName());
-                    FavoriteRecipe.removeFavorite(recipe);
+                    FavoriteRecipe.removeFavorite(recipe, "C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json");
                     vboxFavorite.getChildren().remove(hbox);
                 }
             });
@@ -93,7 +94,7 @@ public class FoodAppController implements Initializable {
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Ingredient ERROR");
-                alert.setHeaderText("Pas d'ingredient");
+                alert.setHeaderText("The ingredient doesn't exit");
                 alert.showAndWait();
                 ingredientTextField.clear();
             }
@@ -104,6 +105,7 @@ public class FoodAppController implements Initializable {
     private void clearAll() {
         ingredientsText.setText("");
         spinner.getValueFactory().setValue(0);
+        JsonReader.ingredients.clear();
     }
 
     @FXML
@@ -116,7 +118,7 @@ public class FoodAppController implements Initializable {
             hbox.setPrefHeight(0.0);
             hbox.setPrefWidth(568.0);
             hbox.setPadding(new Insets(10,10,10,10));
-            hbox.setStyle("-fx-background-color: blue");
+            hbox.setStyle("-fx-background-color: #E2D3c4");
 
             //HyperLink et Button
 
@@ -145,7 +147,7 @@ public class FoodAppController implements Initializable {
             hyperlink.setVisited(false);
             hyperlink.setUnderline(false);
             if(recipeNames.contains(recipe.getName())) {
-                favoriteButton.setStyle("-fx-background-color: red");
+                favoriteButton.setStyle("-fx-background-color: #A4413A");
             } else {
                 favoriteButton.setStyle("-fx-background-color: white");
             }
@@ -159,8 +161,8 @@ public class FoodAppController implements Initializable {
                         alert.showAndWait();
                         ingredientTextField.clear();
                     } else {
-                        favoriteButton.setStyle("-fx-background-color: red");
-                        FavoriteRecipe.addFavorite(recipe);
+                        favoriteButton.setStyle("-fx-background-color: #A4413A");
+                        FavoriteRecipe.addFavorite(recipe, "C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json");
                         HBox hbox = new HBox();
                         hbox.setLayoutX(10.0);
                         hbox.setPrefHeight(25.0);
@@ -194,7 +196,7 @@ public class FoodAppController implements Initializable {
                             public void handle(MouseEvent event) {
                                 favoriteButton.setStyle("-fx-background-color: white");
                                 recipeNames.remove(recipe.getName());
-                                FavoriteRecipe.removeFavorite(recipe);
+                                FavoriteRecipe.removeFavorite(recipe, "C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json");
                                 vboxFavorite.getChildren().remove(hbox);
                             }
                         });
@@ -211,6 +213,7 @@ public class FoodAppController implements Initializable {
             hbox.getChildren().add(hyperlink);
             hbox.getChildren().add(favoriteButton);
             vboxRecipesCenter.getChildren().add(hbox);
+            clearAll();
         }
     }
 

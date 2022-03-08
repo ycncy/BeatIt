@@ -55,7 +55,7 @@
 }
 
 .hyperlink {
-    -fx-text-fill: white;
+    -fx-text-fill: #37312F;
     -fx-border-color: transparent;
 }
 
@@ -72,6 +72,10 @@
 .button:hover {
     -fx-border-color: #C48538;
     -fx-background-color:#C48538;
+}
+
+.button:pressed {
+    -fx-background-color: white;
 }
 
 #spinner .increment-arrow-button,
@@ -100,4 +104,10 @@
     -fx-border-color: white;
     -fx-background-color: white;
     -fx-background-radius: 0em;
+}
+
+#image {
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 5;
 }

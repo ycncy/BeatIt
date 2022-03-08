@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import recipe.FavoriteRecipe;
@@ -26,15 +28,16 @@ public class FoodAppController2 implements Initializable {
     @FXML private Button favoriteButton;
     @FXML private Label ingredientsArea;
     @FXML private Label instructionsArea;
+    @FXML private ImageView image;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         recipeName.setText(FoodAppController.recipeName.toUpperCase(Locale.ROOT));
         recipeName.setStyle("-fx-text-fill: white");
-        for(Recipe recipe : FavoriteRecipe.getRecipes()) {
+        for(Recipe recipe : FavoriteRecipe.getRecipes("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json")) {
             if(recipe.getName().toUpperCase(Locale.ROOT).equals(recipeName.getText())) {
                 if(FavoriteRecipe.favoriteRecipe.contains(recipe)) {
-                    favoriteButton.setStyle("-fx-background-color: red");
+                    favoriteButton.setStyle("-fx-background-color: #A4413A");
                 }
                 for(int i = 1; i < recipe.getMissedIngredients().size(); i++) {
                     if(ingredientsArea.getText().equals("")) {
@@ -48,24 +51,29 @@ public class FoodAppController2 implements Initializable {
                     }
                     ingredientsArea.setText(ingredientsArea.getText() + "\n" + recipe.getUsedIngerdients().get(i).toUpperCase(Locale.ROOT));
                 }
-                instructionsArea.setText(JsonReader.listToString((int) recipe.getId()).toUpperCase(Locale.ROOT));
+                if(JsonReader.listToString((int) recipe.getId()) != null) {
+                    instructionsArea.setText(JsonReader.listToString((int) recipe.getId()).toUpperCase(Locale.ROOT));
+                }
             }
         }
         for(Recipe recipe : JsonReader.recipes) {
-            if(recipe.getName().equals(recipeName.getText())) {
+            image.setImage(new Image(JsonReader.urlImage));
+            if(recipe.getName().toUpperCase(Locale.ROOT).equals(recipeName.getText())) {
                 for(int i = 1; i < recipe.getMissedIngredients().size(); i++) {
                     if(ingredientsArea.getText().equals("")) {
-                        ingredientsArea.setText(recipe.getMissedIngredients().get(0));
+                        ingredientsArea.setText(recipe.getMissedIngredients().get(0).toUpperCase(Locale.ROOT));
                     }
-                    ingredientsArea.setText(ingredientsArea.getText() + "\n" + recipe.getMissedIngredients().get(i));
+                    ingredientsArea.setText(ingredientsArea.getText() + "\n" + recipe.getMissedIngredients().get(i).toUpperCase(Locale.ROOT));
                 }
                 for(int i = 1; i < recipe.getUsedIngerdients().size(); i++) {
                     if(ingredientsArea.getText().equals("")) {
-                        ingredientsArea.setText(recipe.getUsedIngerdients().get(0));
+                        ingredientsArea.setText(recipe.getUsedIngerdients().get(0).toUpperCase(Locale.ROOT));
                     }
-                    ingredientsArea.setText(ingredientsArea.getText() + "\n" + recipe.getUsedIngerdients().get(i));
+                    ingredientsArea.setText(ingredientsArea.getText() + "\n" + recipe.getUsedIngerdients().get(i).toUpperCase(Locale.ROOT));
                 }
-                instructionsArea.setText(JsonReader.listToString((int) recipe.getId()).toUpperCase(Locale.ROOT));
+                if(JsonReader.listToString((int) recipe.getId()) != null) {
+                    instructionsArea.setText(JsonReader.listToString((int) recipe.getId()).toUpperCase(Locale.ROOT));
+                }
             }
         }
     }
@@ -85,34 +93,25 @@ public class FoodAppController2 implements Initializable {
 
     @FXML
     private void disfavorite() {
-        if(JsonReader.recipes.isEmpty()) {
-            for(Recipe recipe : FavoriteRecipe.getRecipes()) {
-                if(recipe.getName().equals(recipeName.getText())) {
-                        FavoriteRecipe.removeFavorite(recipe);
-                        favoriteButton.setStyle("-fx-background-color: white");
+        if(favoriteButton.getStyle().equals("-fx-background-color: #A4413A")) {
+            for(Recipe recipe : FavoriteRecipe.getRecipes("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json")) {
+                if(recipe.getName().toUpperCase(Locale.ROOT).equals(recipeName.getText())) {
+                    FavoriteRecipe.removeFavorite(recipe, "C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json");
+                    favoriteButton.setStyle("-fx-background-color: white");
                 }
             }
         }
-        if(JsonReader.recipes.isEmpty() && FavoriteRecipe.getRecipes().isEmpty()) {
-            for(Recipe recipe2 : FavoriteRecipe.fav) {
-                if(recipe2.getName().equals(recipeName.getText())) {
-                    FavoriteRecipe.addFavorite(recipe2);
-                    favoriteButton.setStyle("-fx-background-color: red");
+        if(favoriteButton.getStyle().equals("-fx-background-color: white")) {
+            for(Recipe recipe : FavoriteRecipe.fav) {
+                if(recipe.getName().toUpperCase(Locale.ROOT).equals(recipeName.getText())) {
+                    FavoriteRecipe.addFavorite(recipe, "C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json");
+                    favoriteButton.setStyle("-fx-background-color: #A4413A");
                 }
             }
-        }
-        if(!JsonReader.recipes.isEmpty()) {
-            for (Recipe recipe : JsonReader.recipes) {
-                if (recipe.getName().equals(recipeName.getText())) {
-                    if (JsonReader.recipes.contains(recipe) && !FavoriteRecipe.favoriteRecipe.contains(recipe)) {
-                        FavoriteRecipe.addFavorite(recipe);
-                        favoriteButton.setStyle("-fx-background-color: red");
-                        break;
-                    }
-                    if (JsonReader.recipes.contains(recipe) && FavoriteRecipe.favoriteRecipe.contains(recipe)) {
-                        FavoriteRecipe.removeFavorite(recipe);
-                        favoriteButton.setStyle("-fx-background-color: white");
-                    }
+            for(Recipe recipe : JsonReader.recipes) {
+                if(recipe.getName().toUpperCase(Locale.ROOT).equals(recipeName.getText())) {
+                    FavoriteRecipe.addFavorite(recipe, "C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json");
+                    favoriteButton.setStyle("-fx-background-color: #A4413A");
                 }
             }
         }

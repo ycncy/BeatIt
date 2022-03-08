@@ -14,8 +14,8 @@ public class FoodApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         JsonReader.reader();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/foodapp/view/foodapp.fxml")));
-        primaryStage.setTitle("FoodApp");
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/foodapp/view/main.fxml")));
+        primaryStage.setTitle("BEAT IT");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();

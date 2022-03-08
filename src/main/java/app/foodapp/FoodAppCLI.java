@@ -52,7 +52,7 @@ public class FoodAppCLI {
                         System.out.println(count1 + ")"  + recipe.getName());
                     }
 
-                    System.out.println("Choisissez une recette par pitié !");
+                    System.out.println("Choisissez une recette !");
 
                     Scanner inputChooseFavorite1 = new Scanner(System.in);
                     chooseFavorite1 = inputChooseFavorite1.nextInt();
@@ -70,7 +70,7 @@ public class FoodAppCLI {
                         System.out.println("Est-ce que vous voulez l'ajouter aux favoris ? (1/2) ");
 
                         if(inputChooseFavorite1.nextInt() == (1)) {
-                            FavoriteRecipe.addFavorite(recipeChoose);
+                            FavoriteRecipe.addFavorite(recipeChoose, "C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json");
                         }
                         if(inputChooseFavorite1.nextInt() == 2) {
                             break;
@@ -82,13 +82,13 @@ public class FoodAppCLI {
                     int chooseFavorite;
                     Scanner inputChooseFavorite = new Scanner(System.in);
                     int count = 0;
-                    List<Recipe> favoriteBuff = new ArrayList<>(FavoriteRecipe.getRecipes());
+                    List<Recipe> favoriteBuff = new ArrayList<>(FavoriteRecipe.getRecipes("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json"));
 
                     for(Recipe recipe : favoriteBuff) {
                         count++;
                         System.out.println(count+".)"  + recipe.getName());
                     }
-                    System.out.println("Choisis une recette chef");
+                    System.out.println("Choisissez une recette !");
 
                     chooseFavorite = inputChooseFavorite.nextInt();
                     if(chooseFavorite > favoriteBuff.size()) {
@@ -100,9 +100,9 @@ public class FoodAppCLI {
                     else {
                         Recipe recipeChoose = favoriteBuff.get(chooseFavorite - 1);
                         favoriteBuff.clear();
-                        System.out.println("Tu veux l'enlever le sang ? (Yes/No)");
+                        System.out.println("Voulez-vous enlever la recette des favoris ? (Yes/No)");
                         if(inputChooseFavorite.next().equals("Yes") || inputChooseFavorite.next().equals("yes")) {
-                            FavoriteRecipe.removeFavorite(recipeChoose);
+                            FavoriteRecipe.removeFavorite(recipeChoose, "C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json");
                         }
                         favoriteBuff.clear();
                         break;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="790.0" style="-fx-background-color: #37312F;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.MainController" stylesheets="@stylesheet.css">
+   <children>
+      <Hyperlink fx:id="hyperlink" style="-fx-text-fill:  #C48538; -fx-font-size: 80; -fx-font-weight: bold" alignment="CENTER" prefHeight="461.0" prefWidth="790.0" text="BEAT EAT" textAlignment="CENTER">
+         <font>
+            <Font size="96.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</Pane>

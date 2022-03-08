@@ -13,13 +13,14 @@ public class FavoriteRecipe {
     public static List<Recipe> favoriteRecipe = new ArrayList<>();
     public static List<Recipe> fav = new ArrayList<>();
 
-    public static List<Recipe> getRecipes() {
+
+    public static List<Recipe> getRecipes(String url) {
         favoriteRecipe.clear();
         JSONParser parser = new JSONParser();
         try {
-            JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json"));
-            for(int i = 0; i < jsonArray.size(); i++) {
-                JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+            JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(url));
+            for (Object value : jsonArray) {
+                JSONObject jsonObject = (JSONObject) value;
                 JSONArray missedIngredientsArray = (JSONArray) jsonObject.get("MissedIngredients");
                 JSONArray usedIngredientsArray = (JSONArray) jsonObject.get("UsedIngredients");
                 List<String> missedIngredients = new ArrayList<>();
@@ -30,8 +31,8 @@ public class FavoriteRecipe {
                 for (Object o : usedIngredientsArray) {
                     usedIngredients.add((String) o);
                 }
-                favoriteRecipe.add(new Recipe(jsonObject.get("Name").toString(),(long) jsonObject.get("id"), usedIngredients, missedIngredients));
-                fav.add(new Recipe(jsonObject.get("Name").toString(),(long) jsonObject.get("id"), usedIngredients, missedIngredients));
+                favoriteRecipe.add(new Recipe(jsonObject.get("Name").toString(), (long) jsonObject.get("id"), usedIngredients, missedIngredients));
+                fav.add(new Recipe(jsonObject.get("Name").toString(), (long) jsonObject.get("id"), usedIngredients, missedIngredients));
             }
         } catch (IOException | ParseException malformedURLException) {
             malformedURLException.printStackTrace();
@@ -39,7 +40,7 @@ public class FavoriteRecipe {
         return favoriteRecipe;
     }
 
-    public static void addFavorite(Recipe recipe) {
+    public static void addFavorite(Recipe recipe,String url) {
         JSONObject obj = new JSONObject();
         obj.put("Name", recipe.getName());
         obj.put("id", recipe.getId());
@@ -54,7 +55,7 @@ public class FavoriteRecipe {
         JSONParser jsonParser = new JSONParser();
 
         try {
-            JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json"));
+            JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader(url));
             jsonArray.add(obj);
             favoriteRecipe.add(recipe);
             fav.add(recipe);
@@ -67,13 +68,13 @@ public class FavoriteRecipe {
         }
     }
 
-    public static void removeFavorite(Recipe recipe) {
+    public static void removeFavorite(Recipe recipe, String url) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Name", recipe.getName());
         JSONParser jsonParser = new JSONParser();
         try {
             JSONArray finalArray = new JSONArray();
-            JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader("C:\\Users\\tata1\\IdeaProjects\\food-app-groupe-zz\\src\\main\\resources\\Favorite.json"));
+            JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader(url));
             for(int i = 0; i < jsonArray.size(); i++) {
                 if(!((JSONObject) jsonArray.get(i)).get("Name").equals(recipe.getName())) {
                     finalArray.add(jsonArray.get(i));

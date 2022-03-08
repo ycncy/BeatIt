@@ -16,6 +16,7 @@ public class JsonReader {
     public static List<String> ingredients = new ArrayList<>();
     public static List<Recipe> recipes = new ArrayList<>();
     public static List<String> instructions = new ArrayList<>();
+    public static String urlImage;
 
     public static String getIngredients() {
         String ingredientsInput = null;
@@ -34,7 +35,7 @@ public class JsonReader {
         recipes.clear();
         JSONParser parser = new JSONParser();
         try {
-            URL spooncular = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + getIngredients() + "&number=" + number + "&apiKey=c635a316d5e24e939503ff1e7342e9f5");
+            URL spooncular = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + getIngredients() + "&number=" + number + "&apiKey=58dc69c6e25545be891d44c1147a74e1&limitLicense=true");
             URLConnection url = spooncular.openConnection();
             JSONArray jsonArray = (JSONArray) parser.parse(new BufferedReader(new InputStreamReader(url.getInputStream())));
             for (Object value : jsonArray) {
@@ -44,6 +45,7 @@ public class JsonReader {
                 JSONObject jsonObject = (JSONObject) value;
                 JSONArray missedIngredientsArray = (JSONArray) jsonObject.get("missedIngredients");
                 JSONArray usedIngredientsArray = (JSONArray) jsonObject.get("usedIngredients");
+                urlImage = (String) jsonObject.get("image");
 
                 for (Object o : missedIngredientsArray) {
                     JSONObject missedObject = (JSONObject) o;
@@ -62,11 +64,11 @@ public class JsonReader {
         }
     }
 
-    public static String instructions(int id) {
+    public static void instructions(int id) {
         instructions.clear();
         JSONParser parser = new JSONParser();
         try {
-            URL spooncular = new URL("https://api.spoonacular.com/recipes/" + id +  "/analyzedInstructions?apiKey=c635a316d5e24e939503ff1e7342e9f5");
+            URL spooncular = new URL("https://api.spoonacular.com/recipes/" + id +  "/analyzedInstructions?apiKey=58dc69c6e25545be891d44c1147a74e1&limitLicense=true");
             URLConnection url = spooncular.openConnection();
             JSONArray jsonArray = (JSONArray) parser.parse(new BufferedReader(new InputStreamReader(url.getInputStream())));
             List<String> instructionslist = new ArrayList<>();
@@ -84,7 +86,6 @@ public class JsonReader {
         } catch (IOException | ParseException malformedURLException) {
             malformedURLException.printStackTrace();
         }
-        return instructions.toString();
     }
 
     public static void reader() {
